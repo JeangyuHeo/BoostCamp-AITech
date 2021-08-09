@@ -2,7 +2,7 @@
 
 #### AI 기술 포함 관계
 
-![화면 캡처 2021-08-09 102943](C:\Users\82104\Desktop\화면 캡처 2021-08-09 102943.png)
+![화면 캡처 2021-08-09 102943](https://user-images.githubusercontent.com/88299729/128722624-73f3570d-5d88-4c89-a900-c7acc32b2cac.png)
 
 
 
