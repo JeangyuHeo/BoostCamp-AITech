@@ -48,7 +48,7 @@
 
 ### Loss Function
 
-![화면 캡처 2021-08-09 104616](C:\Users\82104\Desktop\화면 캡처 2021-08-09 104616.png)
+![화면 캡처 2021-08-09 104616](https://user-images.githubusercontent.com/88299729/128721726-b36e796c-b109-4d41-b6a8-bae283a14385.png)
 
 
 
@@ -124,7 +124,7 @@ source -  'Deep Learning's Most Important Ideas - A Brief Historical Review'
 
 
 
-![image-20210809221019504](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809221019504.png)
+![image-20210809221019504](https://user-images.githubusercontent.com/88299729/128721820-997d9916-f5fa-49f8-a670-812f6e844480.png)
 
 
 
@@ -138,13 +138,13 @@ source -  'Deep Learning's Most Important Ideas - A Brief Historical Review'
 
 * **기본 구조**
 
-![화면 캡처 2021-08-09 131854](C:\Users\82104\Desktop\화면 캡처 2021-08-09 131854.png)
+![화면 캡처 2021-08-09 131854](https://user-images.githubusercontent.com/88299729/128721882-9a9dc564-15c6-42e0-92ff-7632e7c60515.png)
 
 
 
 * **가장 최적의 parameters 찾는 과정**
 
-![image-20210809223642817](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809223642817.png)![image-20210809223459155](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809223459155.png)
+![image-20210809223622061](https://user-images.githubusercontent.com/88299729/128721937-7afe217e-e417-4376-b163-321186ccf7cb.png)![image-20210809223459155](https://user-images.githubusercontent.com/88299729/128722030-7a7711ab-3d11-4e7c-b38c-478391c7bc9a.png)
 
 
 
@@ -152,7 +152,7 @@ loss 를 w에 대해서 미분하여 w 값을 업데이트 해주고, b에 대�
 
 
 
-![화면 캡처 2021-08-09 131657](C:\Users\82104\Desktop\화면 캡처 2021-08-09 131657.png)
+![화면 캡처 2021-08-09 131657](https://user-images.githubusercontent.com/88299729/128722091-6e38597f-4b27-4a3c-a4f0-7689b5608925.png)
 
 
 
@@ -160,7 +160,7 @@ loss 를 w에 대해서 미분하여 w 값을 업데이트 해주고, b에 대�
 
 
 
-![image-20210809224139653](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809224139653.png)
+![image-20210809224139653](https://user-images.githubusercontent.com/88299729/128722158-deb62482-6338-4d7a-8d8f-03869363ed9a.png)
 
 
 
@@ -168,7 +168,7 @@ loss 를 w에 대해서 미분하여 w 값을 업데이트 해주고, b에 대�
 
 
 
-![image-20210809224228375](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809224228375.png)
+![image-20210809224228375](https://user-images.githubusercontent.com/88299729/128722203-2ade571d-4f5a-4e07-972b-6b2d563419aa.png)
 
 비선형 변형을 줌으로서 더 적합한 parameter 값으로 수렴 할 수 있다.
 
@@ -178,7 +178,7 @@ loss 를 w에 대해서 미분하여 w 값을 업데이트 해주고, b에 대�
 
 
 
-![image-20210809224356827](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809224356827.png)
+![image-20210809224356827](https://user-images.githubusercontent.com/88299729/128722247-5cca2ced-4d7b-4750-a895-78ad4f005588.png)
 
 
 
@@ -192,6 +192,6 @@ loss 를 w에 대해서 미분하여 w 값을 업데이트 해주고, b에 대�
 
 
 
-![image-20210809224525625](C:\Users\82104\AppData\Roaming\Typora\typora-user-images\image-20210809224525625.png)
+![image-20210809224525625](https://user-images.githubusercontent.com/88299729/128722293-6ba33511-c0ca-43a0-97ce-8d6975b70e54.png)
 
 위의 과정을 반복해주면 그것이 Multi-Layer Perceptron 이다.
