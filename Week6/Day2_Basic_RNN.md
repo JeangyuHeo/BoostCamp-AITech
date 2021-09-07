@@ -91,5 +91,95 @@ sequential data 의 첫 입력만 주고 그것의 output을 다음 input으로 
 
 * 거듭제곱의 형태로 gradient가 빠르게 감소함으로서 뒤쪽의 time step까지 유의미한 gradient signal을 전달 할 수 없다.
 
+![image](https://user-images.githubusercontent.com/88299729/132360701-92c22c11-e103-416f-8cd8-d186d5ae890f.png)
 
+
+
+## LSTM (Long Short-Term Memory)
+
+RNN에서 gradient vanishing 과 exploding 문제를 해결하기 위해서 만들어진 모델이다. 즉, RNN 보다 나중까지 data가 잘 보존된다.
+
+![화면 캡처 2021-09-07 232026](https://user-images.githubusercontent.com/88299729/132369641-b55760c4-e9b0-49b6-b9dc-2bcf69da55a8.png)
+
+
+
+### LSTM의 중요한 2개의 States
+
+#### 1. Cell state vector
+
+* 우리가 필요로 하는 데이터를 모두 가지고 있는 완성도 있는 데이터
+
+  ex) "Hello" 라는 출력을 할 때, Cell State는 "의 끝 마무리를 지어야 한다는 정보를 계속 가지고 있다.
+
+#### 2. Hidden state vector
+
+* cell state vector를 한번 더 가공해서 이번 layer에서 노출되어야 하는 것만 필터링 된 데이터
+
+  ex) "Hello" 라는 출력을 할 때, 이번 출력에 의미 없는 " 정보 보단 인접한 문자에 대한 가중치 정보를 가진다.
+
+  
+
+### LSTM의 중요한 4개의 gates
+
+cell state 에 정보가 **얼마나 흐르게 할지 제어**하기 위해 존재한다. 즉, 게이트란 cell state vector와 hidden state vector를 계산하기 위한 **중간 결과물**이다.
+
+
+
+![화면 캡처 2021-09-07 232514](https://user-images.githubusercontent.com/88299729/132369697-e67983e7-5b80-4027-8c2f-0f6497a387af.png)
+
+#### 1. Input gate
+
+![화면 캡처 2021-09-07 234922](https://user-images.githubusercontent.com/88299729/132369791-25664d12-eafd-4863-ae7b-a2829b27d1cd.png)
+
+x<sub>t</sub>와 h<sub>t-1</sub> 의 선형 결합을 통해 만들어진 output vector에 sigmoid를 취해준다. 이를 C<sub>t</sub> 와 곱해준다.
+
+#### 2. Forget gate
+
+![화면 캡처 2021-09-07 234855](https://user-images.githubusercontent.com/88299729/132369753-909ca616-d7a9-4ab6-93e8-c353d4bee326.png)
+
+x<sub>t</sub>와 h<sub>t-1</sub> 의 선형 결합을 통해 만들어진 output vector에 sigmoid를 취해준다. 이 값을 cell state vector 값에 곱해줌으로서 일정 값을 잊어먹는 효과는 낸다.
+
+#### 3. Output gate
+
+![화면 캡처 2021-09-07 234939](https://user-images.githubusercontent.com/88299729/132369826-44b297e9-a3e2-4193-ad35-633a84babe32.png)
+
+x<sub>t</sub>와 h<sub>t-1</sub> 의 선형 결합을 통해 만들어진 output vector에 sigmoid를 취해준다.
+
+#### 4. Gate gate
+
+![화면 캡처 2021-09-07 234922](https://user-images.githubusercontent.com/88299729/132369791-25664d12-eafd-4863-ae7b-a2829b27d1cd.png)
+
+xt와 ht-1 의 선형 결합을 통해 만들어진 output vector에 tanh 함수를 취해준다. 이 값은 C<sub>t</sub> 로 사용된다.
+
+
+
+#### 최종 H<sub>t</sub>
+
+![화면 캡처 2021-09-07 234939](https://user-images.githubusercontent.com/88299729/132369928-c74f345a-5803-4b9f-b969-562fa127b6e9.png)
+
+* C<sub>t</sub> 에 tanh을 취해주고, O<sub>t</sub> 에 sigmoid가 취해짐으로서 cell state 와 특정 dim 별로 각각 적정한 비율만큼 작게 만들어서 최종 H<sub>t</sub>를 만든다.
+* C<sub>t</sub>는 기억해야 할 모든 정보를 담은 것이다.
+* H<sub>t</sub> 에는 지금 현재 time step에서 예측 값을 output layer의 입력으로 사용하기 위해 직접적으로 필요한 값만 가지고 있다. 필터링 된 것과 같다.
+
+
+
+## GRU (Gated Recurrent Unit)
+
+![화면 캡처 2021-09-08 000539](https://user-images.githubusercontent.com/88299729/132369950-37b61807-42ac-4db3-be20-f97b87c4ef9c.png)
+
+* cell state vector와 hidden state vector를 일원화 하여서 hidden state vector만 존재한다.
+* LSTM과 비교해서 적은 메모리 요구량과 빠른 계산 시간이 확보되도록 제작되었다.
+* h<sub>t</sub> 값을 구하기 위해 1-z<sub>t</sub> 를 사용했다는게 큰 특징이다.
+* 가중 평균의 형태로 연산이 된다.
+
+
+
+## 최종 Summary
+
+![화면 캡처 2021-09-08 000549](https://user-images.githubusercontent.com/88299729/132369978-0cad56eb-8c17-448a-a3b9-c6a8baf9d6c0.png)
+
+* 다양한 길이를 가질 수 있는 sequence data에 특화된 유연한 형태의 딥러닝이다.
+* Vanilla RNN 구조가 간단하지만, 학습 시에 gradient vanishing, exploding 문제가 있어서 잘 사용되지 않는다.
+* 이를 보완한 모델이 LSTM, GRU 이다.
+* cell state vector, hidden state vector 각 스텝에서 업데이트 하는 과정이 덧셈에 기반하는 연산이기 때문에 gradient의 큰 변화가 없어서 vanishing, explosion, long term dependency 문제를 해결 할 수 있었다.
 
