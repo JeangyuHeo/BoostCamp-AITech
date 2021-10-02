@@ -93,3 +93,15 @@
 
 <br>
 
+| Day      | Topic                                 |
+| -------- | ------------------------------------- |
+| [Day1]() | NLP review                            |
+| [Day2]() | BERT                                  |
+| [Day3]() | single sentence classification - BERT |
+| [Day4]() | two sentence classification -BERT     |
+| [Day5]() | Token classificaion - BERT            |
+
+<br>
+
+<br>
+
