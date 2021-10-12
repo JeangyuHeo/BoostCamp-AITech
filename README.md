@@ -93,13 +93,15 @@
 
 <br>
 
-| Day      | Topic                                 |
-| -------- | ------------------------------------- |
-| [Day1]() | NLP review                            |
-| [Day2]() | BERT                                  |
-| [Day3]() | single sentence classification - BERT |
-| [Day4]() | two sentence classification -BERT     |
-| [Day5]() | Token classificaion - BERT            |
+### Week 9 - Transformer & PLM
+
+| Day                                                          | Topic                                 |
+| ------------------------------------------------------------ | ------------------------------------- |
+| [Day1-1](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day1_NLP_review.md), [Day1-2](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day1_NLP_review_2.md) | NLP review                            |
+| [Day2](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day2_BERT.md) | BERT                                  |
+| [Day3](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day3_BERT_single_sentence_classification.md) | single sentence classification - BERT |
+| [Day4](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day4_BERT_two_sentence_relation_classification.md) | two sentence classification -BERT     |
+| [Day5](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week9/Day5_BERT_Token_classification.md) | Token classificaion - BERT            |
 
 <br>
 
