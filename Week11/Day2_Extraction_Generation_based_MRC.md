@@ -90,3 +90,139 @@
 
 ## Generation-based MRC
 
+### Generation-based MRC
+
+#### Generation-based MRC 개념 및 개요
+
+* **MRC 문제를 푸는 방법**
+
+  * Extraction-based MRC : 지문 (context) 내 답의 위치를 예측 => 분류 문제 (classification)
+
+  ![화면 캡처 2021-10-14 141250](https://user-images.githubusercontent.com/88299729/137261414-1150f0a5-6756-44a0-9f36-896c7daecf58.png)
+
+  * Generation-based MRC : 주어진 지문과 질의 (question)를 보고, 답변을 생성 => 생성 문제 (generation)
+
+![화면 캡처 2021-10-14 141255](https://user-images.githubusercontent.com/88299729/137261448-d5e898c2-e3e1-4a7d-9826-1762db9121bf.png)
+
+
+
+
+
+#### Generation-based MRC 평가 방법
+
+동일한 extractive answer datasets => Extraction-based MRC와 동일한 평가 방법을 사용 (recap)
+
+* **Exact Match (EM) Score**
+  * EM = 1 if (Characters of the prediction) == (Characters of ground-truth) else 0
+* **F1 Score**
+  * 예측한 답과 ground-truth 사이의 token overlap을 F1으로 계산
+
+![image-20211014141921831](https://user-images.githubusercontent.com/88299729/137261514-18a75376-2bfc-4fc5-83c4-69ea3854fd77.png)
+
+
+
+#### Generation-based MRC Overview
+
+![화면 캡처 2021-10-14 142040](https://user-images.githubusercontent.com/88299729/137261537-e8cc4fcc-acef-471f-b2cb-21b6dbc1ea02.png)
+
+#### Generation-based MRC & Extraction-based MRC 비교
+
+![화면 캡처 2021-10-14 142733](https://user-images.githubusercontent.com/88299729/137261557-4eee7704-e65f-4e01-9e97-db6c50706672.png)
+
+* **MRC 모델 구조**
+  * Seq-to-seq PLM 구조 (generation) vs. PLM + Classifier구조 (extraction)
+* **Loss 계산을 위한 답의 형태 / Prediction의 형태**
+  * Free-form text 형태 (generation) vs. 지문 내 답의 위치 (extraction)
+  * => Extraction-based MRC : F1 계산을 위해 text로의 별도 변환 과정이 필요
+
+### Pre-processing
+
+#### 입력 표현 - 데이터 예시
+
+![화면 캡처 2021-10-14 143326](https://user-images.githubusercontent.com/88299729/137261625-0f17a868-e010-4a86-b522-21dde639b06a.png)
+
+#### 입력 표현 - 토큰화
+
+Tokenization (토큰화) : 텍스트를 의미를 가진 작은 단위로 나눈 것 (형태소)
+
+* Extration-based MRC와 같이 WordPiece Tokenizer를 사용함
+  * WordPiece Tokenizer 사전 학습 단계에서 먼저 학습에 사용한 전체 데이터 집합 (Corpus)에 대해서 구축되어 있어야함
+  * 구축 과정에서 미리 각 단어 토큰들에 대해 순서대로 번호(index)를 부여해둠
+* Tokenizer은 입력 텍스트를 토큰화 한 뒤, 각 토큰을 미리 만들어둔 단어 사전에 따라 인덱스로 변환
+
+![화면 캡처 2021-10-14 143825](https://user-images.githubusercontent.com/88299729/137261645-63c5d436-7af2-49ef-81c3-0b44b31e8129.png)
+
+
+
+#### 입력 표현 - Special Token
+
+* 학습 시에만 사용되며 단어 자체의 의미는 가지지 않는 특별한 토큰
+  * SOS(Start Of Sentence), EOS(End Of Sentence), CLS, SEP, PAD, UNK.. etc
+* => Extraction-based MRC에선 CLS, SEP, PAD 토큰을 사용
+* => Generation-based MRC 에서도 PAD 토큰은 사용됨, CLS, SEP 토큰 또한 사용할 수 있으나, 대신 자연어를 이용하여 정해진 텍스트 포맷(format)으로 데이터를 생성
+
+![화면 캡처 2021-10-14 144521](https://user-images.githubusercontent.com/88299729/137261676-f27a3924-818e-4246-a96b-8c43a7003383.png)
+
+
+
+#### 입력 표현 - additional information
+
+* **Attention mask**
+  * Extraction-based MRC와 똑같이 attention 연산을 수행할 지 결정하는 attention mask 존재
+* **Token type ids**
+  * BERT와 달리 BART에서는 입력시퀀스에 대한 구분이 없어 token_type_ids가 존재하지 않음
+  * 따라서, Extraction-based MRC와 달리 입력에 token_type_ids 가 들어가지 않음
+
+![화면 캡처 2021-10-14 144759](https://user-images.githubusercontent.com/88299729/137261701-6ec9c29e-1548-4894-a105-b71a90762cf8.png)
+
+#### 출력 표현 - 정답 출력
+
+* **Sequence of token ids**
+  * Extraction-based MRC에선 텍스트를 생성해내는 대신 시작/끝 토큰의 위치를 출력하는 것이 모델의 최종 목표였음
+  * Generation-based MRC는 그보다 조금 더 어려운 실제 텍스트를 생성하는 과제를 수행
+  * 전체 sequence의 각 위치 마다 모델이 아는 모든 단어들 중 하나의 단어를 맞추는 classification 문제
+
+![화면 캡처 2021-10-14 145610](https://user-images.githubusercontent.com/88299729/137261719-4ed5b18d-f9f5-4a1d-84c0-2fe15a904f2e.png)
+
+### Model
+
+#### BART
+
+![화면 캡처 2021-10-14 145632](https://user-images.githubusercontent.com/88299729/137261740-7ca542c2-44e0-4bca-bf4b-fe67ec5be3b3.png)
+
+기계 독해, 기계 번역, 요약, 대화 등 sequence to sequence 문제의 pre-training을 위한 denoising autoencoder
+
+
+
+#### BART Encoder & Decoder
+
+![화면 캡처 2021-10-14 145812](https://user-images.githubusercontent.com/88299729/137261803-d8e97c6a-cce0-46ac-af26-7a226e09445c.png)
+
+* BART의 인코더는 BERT처럼 bi-directional
+* BART의 디코더는 GPT처럼 uni-directional (auto regressive)
+
+![화면 캡처 2021-10-14 150258](https://user-images.githubusercontent.com/88299729/137261840-18cdbf25-a819-4560-af4f-76ef297d77aa.png)
+
+#### Pre-training BART
+
+![화면 캡처 2021-10-14 150408](https://user-images.githubusercontent.com/88299729/137261863-34d9f775-bc19-4731-a741-2aa3b2ed595d.png)
+
+* BART는 텍스트에 노이즈를 주고 원래 텍스트를 복구하는 문제를 푸는 것으로 pre-training 함
+
+
+
+### Post-processing
+
+#### Decoding
+
+![화면 캡처 2021-10-14 150720](https://user-images.githubusercontent.com/88299729/137261905-af330149-0f38-44b1-bc83-01205484cfa6.png)
+
+* 디코더에서 이전 스텝에서 나온 출력이 다음 스텝의 입력으로 들어감 (autoregressive)
+* 맨 처음 입력은 문장 시작을 뜻하는 special token
+
+
+
+#### Searching
+
+![화면 캡처 2021-10-14 150757](https://user-images.githubusercontent.com/88299729/137261929-a1b111c9-1792-4aec-9e9d-f4915ac7c1a2.png)
+
