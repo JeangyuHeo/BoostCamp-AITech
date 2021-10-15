@@ -107,3 +107,10 @@
 
 <br>
 
+### Week 10 - Generate Model & Latest NLP Tech
+
+| Day                                                          | Topic                |
+| ------------------------------------------------------------ | -------------------- |
+| [Day1](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week10/Day1_GPT.md) | Generate model - GPT |
+| [Day3](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week10/Day3_latest_NLP_tech.md) | Latest NLP Tech      |
+
