@@ -126,7 +126,7 @@
 | [Day2](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week11/Day2_Extraction_Generation_based_MRC.md) | Extraction & Generation based MRC    |
 | [Day3](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week11/Day3_Passage_Retrieval_Sparse_Embedding.md) | Passage Retrieval - Sparse Embedding |
 | [Day3-2](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week11/Day3-2_Passage_Retrieval_Dense_Embedding.md) | Passage Retrieval - Dense Embedding  |
-|                                                              |                                      |
+| [Day4](https://github.com/JeangyuHeo/BoostCamp-AITech/blob/main/Week11/Day4_Passage_retrieval-Scaling_Up.md) | Passage Retrieval - Scaling up       |
 |                                                              |                                      |
 |                                                              |                                      |
 
